@@ -1,4 +1,4 @@
-<Instrument_Settings>
+<xml>
     <inst>
         <name>Instrument 1</name>
         <coupling>'AC'</coupling>
@@ -19,5 +19,5 @@
         <pre_trigger_delay>15</pre_trigger_delay>
         <post_trigger_delay>15</post_trigger_delay>
     </inst>
-</Instrument_Settings>
+</xml>
 
