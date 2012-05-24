@@ -1,0 +1,23 @@
+<Instrument_Settings>
+    <inst>
+        <name>Instrument 1</name>
+        <coupling>'AC'</coupling>
+        <impedence>50</impedence>
+        <bandwidth>500</bandwidth>
+        <rise_time>0.7</rise_time>
+        <input_voltage>5</input_voltage>
+        <input_offset>2</input_offset>
+        <vertical_resolution>3.91</vertical_resolution>
+        <sampling_rate>10</sampling_rate>
+        <acquisition_memory>2</acquisition_memory>
+        <acquisition_mode>"sequence"</acquisition_mode>
+        <timebase>150</timebase>
+        <trigger_source>"external"</trigger_source>
+        <trigger_coupling>'DC'</trigger_coupling>
+        <trigger_level>2</trigger_level>
+        <edge_trigger_slope>'NEGATIVE'</edge_trigger_slope>
+        <pre_trigger_delay>15</pre_trigger_delay>
+        <post_trigger_delay>15</post_trigger_delay>
+    </inst>
+</Instrument_Settings>
+
