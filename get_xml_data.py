@@ -1,6 +1,6 @@
 from lxml import etree
 
-def get_settings_dict(filename):
+def get_settings_list(filename):
 	"""
 	Takes in an xml filename string and returns a list of dictionaries containing settings for each instrument
 	"""
