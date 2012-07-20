@@ -106,7 +106,6 @@ def Readout()
 def Close():
     status = AqDrv4.Acqrs_closeAll()
     
-
 if __name__ == __main__:
 
     print "Starting Acquisition"
