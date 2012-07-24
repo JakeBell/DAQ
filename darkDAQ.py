@@ -31,7 +31,8 @@ def FindDevices():
     
     if (NumInstruments < 1):
         print "Instrument not found!"
-    
+    else:
+        print "Found %s instruments!" % NumInstruments.value
     #Initialize digitizers
     for instrumentNumber in range(NumInstruments):
         py_resourceName = "PCI::INSTR%s" % instrumentNumber
@@ -109,7 +110,7 @@ def ReadOut():
     readPar = structs.AqReadParameters()
     dataDesc = structs.AqDataDescriptor()
     # AqSegmentDescriptor* segDesc = new AqSegmentDescriptor[nbrSegments];
-    # segDesc = [structs.AqSegmentDescriptor] * nbr.Segments.value
+    # segDesc = [structs.AqSegmentDescriptor] * nbrSegments.value
     
     readPar.dataType = ctypes.c_long(0)
     readPar.readMode = ctypes.c_long(1)
@@ -127,7 +128,7 @@ def ReadOut():
     
     # ViInt8* adcArray = new ViInt8[(nbrSamples + tbNextSegmentPad)*(nbrSegments + 1)];
     # adcArray = [visa.ViInt8] * ((nbrSamples.value + tbNextSegmentPad.value) * (nbrSegments.value + 1))
-    status = AqDrv4.AcqrsD1_readData(Instrument[0], channel, ctypes.byref(readPar), adcArray, ctypes.byref(dataDesc), segDesc)
+    status = AqDrv4.AcqrsD1_readData(InstrumentID[0], channel, ctypes.byref(readPar), adcArray, ctypes.byref(dataDesc), segDesc)
     
     #Write Data to a file
     now = str(datetime.now())
@@ -135,10 +136,21 @@ def ReadOut():
     file = open(filename, 'w')
     file.write("# Acqiris Waveforms")
     file.write("# Channel: %s" % channel)
-    file.write("# Samples acquired: %s" % dataDesc.returnedSamplesPerSeg.value)
-    file.write("# Segments acquired: %s" % dataDesc.returnedSegments.value)
+    file.write("# Samples acquired: %s" % dataDesc.returnedSamplesPerSeg)
+    file.write("# Segments acquired: %s" % dataDesc.returnedSegments)
 
-        
+    file.write("# ADC counts")
+    for j in range(dataDesc.returnedSegments):
+        for i in range(dataDesc.returnedSamplesPerSeg):
+            file.write(str(int(adcArray[j*readPar.segmentOffset + i])))
+    
+    file.write("# Voltage")
+    for j in range(dataDesc.returnedSegments):
+        for i in range(dataDesc.returnedSamplesPerSeg):
+            file.write(str(int(adcArray[j*readPar.segmentOffset + i]) * dataDesc.vGain - dataDesc.vOffset))
+            
+    file.close()
+    
 def Close():
     status = AqDrv4.Acqrs_closeAll()
     

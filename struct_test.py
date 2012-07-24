@@ -62,7 +62,7 @@ class AqDataDescriptor(Structure):
                 ('sampTime', c_double),
                 ('vGain', c_double),
                 ('vOffset', c_double),
-                ('returenedSegments', c_long),
+                ('returnedSegments', c_long),
                 ('nbrAvgWforms', c_long),
                 ('actualTriggersInAcqLo', c_ulong),
                 ('actualTriggersInAcqHi', c_ulong),
