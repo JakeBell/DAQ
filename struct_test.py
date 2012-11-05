@@ -74,6 +74,14 @@ class AqGateParameters(Structure):
     _fields_ = [('GatePos', c_long),
                 ('GateLength', c_long)]
 
+# this can be done way better!!!!    
+class InstrumentIDArray():
+    def get_data_type(self, length):
+        self.InstrumentIDArray = []
+        for i in range(length):
+            self.InstrumentIDArray.append(c_ulong())
+        return self.InstrumentIDArray
+    
 #enums for now
 
 #enum AqReadType
